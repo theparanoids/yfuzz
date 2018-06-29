@@ -1,0 +1,26 @@
+package: github.com/yahoo/yfuzz
+import:
+- package: github.com/gorilla/mux
+  version: ^1.6.1
+- package: github.com/spf13/viper
+  version: ^1.0.2
+- package: github.com/spf13/jwalterweatherman
+- package: github.com/gorilla/handlers
+  version: ^1.3.0
+- package: github.com/yahoo/athenz
+  version: ^1.7.45
+  subpackages:
+  - clients/go/zms
+- package: k8s.io/apimachinery
+  subpackages:
+  - pkg/apis
+- package: k8s.io/api
+  subpackages:
+  - batch/v1
+  - core/v1
+- package: k8s.io/client-go
+  subpackages:
+  - kubernetes
+  - rest
+  - tools
+  version: ^7.0.0

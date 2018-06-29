@@ -1,0 +1,51 @@
+port: 4443
+log-file: ./yfuzz.log
+access-log-file: ./access.log
+
+# Information for TLS
+tls:
+  ca-cert-file: /path/to/ca/cert/file
+  cert-file: /path/to/cert/file
+  key-file: /path/to/key/file
+
+# Information for authentication/authorization
+auth:
+  # Information for Athenz (see http://athenz.io/)
+  athenz:
+    url: https://your-athenz-server.com/zms/v1
+    cert-file: /path/to/athenz/cert
+    key-file: /path/to/athenz/key
+    ca-issuer-name: Athenz CA Name
+    action: access
+    resource: yfuzz:yfuzz
+
+# Information for kubernetes and job configuration
+kubernetes:
+  # Path to your kubeconfig (if running outside of a cluster)
+  # If unset, YFuzz will use a service account to authenticate
+  config-path: /path/to/kube/config
+
+  # Namespace for YFuzz to use
+  namespace: default
+
+  # Config for YFuzz jobs
+  job-config:
+    # Number of concurrent pods to run per job
+    parallelism: 1
+
+    # PVC for sharing corpora
+    persistent-volume-claim: yfuzz-volume
+
+    # Configuration for the logging sidecar and output format
+    log:
+      # YFuzz will tail the log of a pod and look for a specified string to indicate success
+      crash-found-message: SUCCESS
+      tail-lines: 5
+
+    # Memory/CPU limits for pods
+    memory:
+      request: 100Mi
+      limit: 1Gi
+    cpu:
+      request: 0.5
+      limit: 1
