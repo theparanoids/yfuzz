@@ -8,8 +8,8 @@ import (
 
 	"github.com/gorilla/mux"
 	jww "github.com/spf13/jwalterweatherman"
-	"github.com/yahoo/yfuzz/api/schema"
-	"github.com/yahoo/yfuzz/types"
+	"github.com/yahoo/yfuzz/pkg/schema"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/types"
 )
 
 // GetJobStatus retrieves the status of all pods for a given job.

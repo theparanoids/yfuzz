@@ -1,5 +1,1 @@
-_build/
-vendor/
 *.log
-config.yaml
-yfuzz

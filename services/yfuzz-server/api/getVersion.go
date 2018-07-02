@@ -6,8 +6,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/yahoo/yfuzz/api/schema"
-	"github.com/yahoo/yfuzz/config"
+	"github.com/yahoo/yfuzz/pkg/schema"
+	"github.com/yahoo/yfuzz/pkg/version"
 )
 
 // GetVersion retrieves the server version.
@@ -19,5 +19,5 @@ import (
 // Response Fields:
 //	- version: version of the YFuzz server (string)
 func GetVersion(r *http.Request, _ EndpointDependencies) (int, interface{}) {
-	return http.StatusOK, schema.GetVersionResponse{Version: config.Version}
+	return http.StatusOK, schema.GetVersionResponse{Version: version.Version}
 }

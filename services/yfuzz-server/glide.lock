@@ -1,5 +1,5 @@
-hash: 3ce407a2cc94abed03980f87cba304d0ee6d180cc5e480048dc77bbfd5ec1a76
-updated: 2018-06-26T09:52:08.481117-07:00
+hash: db03907e30e1ba5f9b3469b6d8dfe96e752ef75b4e43f66472fb95db48f93dd2
+updated: 2018-07-03T11:08:02.315005-07:00
 imports:
 - name: github.com/ardielle/ardielle-go
   version: eceec2d93a832e111f4e0f7dd58adcf95a616038
@@ -75,13 +75,17 @@ imports:
 - name: github.com/spf13/viper
   version: b5e8006cbee93ec955a89ab31e0e3ce3204f3736
 - name: github.com/yahoo/athenz
-  version: 83ced2c8b25011526dc658e5243da6739018b143
+  version: 74403f71bc295cd5433b4941fe58d87a37e30a7f
   subpackages:
   - clients/go/zms
 - name: golang.org/x/crypto
   version: 81e90905daefcd6fd217b62423c0908922eadb30
   subpackages:
   - ssh/terminal
+- name: golang.org/x/lint
+  version: 06c8688daad7faa9da5a0c2f163a3d14aac986ca
+  subpackages:
+  - golint
 - name: golang.org/x/net
   version: 1c05540f6879653db88113bc4a2b70aec4bd491f
   subpackages:
@@ -106,6 +110,10 @@ imports:
   version: f51c12702a4d776e4c1fa9b0fabab841babae631
   subpackages:
   - rate
+- name: golang.org/x/tools
+  version: ffe88906718454e356e61776b54256e873fc133b
+  subpackages:
+  - cmd/goimports
 - name: gopkg.in/inf.v0
   version: 3887ee99ecf07df5b447e9b00d9c0b2adaa9f3e4
 - name: gopkg.in/yaml.v2
@@ -264,4 +272,6 @@ imports:
   - util/flowcontrol
   - util/homedir
   - util/integer
-testImports: []
+testImports:
+- name: github.com/alecthomas/gometalinter
+  version: a0a6cc517e763fe2cfe7618b819ec02fc11651f3

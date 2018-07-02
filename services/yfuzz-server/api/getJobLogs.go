@@ -9,7 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	jww "github.com/spf13/jwalterweatherman"
-	"github.com/yahoo/yfuzz/api/schema"
+	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
 // GetJobLogs retrieves the logs for a specific job.

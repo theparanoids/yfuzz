@@ -1,0 +1,29 @@
+dist: trusty
+sudo: false
+addons:
+  apt:
+    packages:
+    - glide
+branches:
+  only: master
+jobs:
+  include:
+  - env: JOB=yfuzz-server
+    language: go
+script:
+- source ./scripts/git_version.sh
+- case $JOB in "yfuzz-server") make --directory=services/yfuzz-server ;; esac
+
+# If the build succeeded, push a tag
+before_deploy:
+- git config --global user.email "builds@travis-ci.com"
+- git config --global user.name "Travis CI"
+- git tag $YFUZZ_BUILD_VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+deploy:
+  provider: releases
+  api_key:
+    secure: nfodXK4REq90/Gh8B2mRDn+QFpH83hsgivtZ1UWUJC/3H9KhDHXkNYpi6d3ym9I3wEiacy834ISlamzA+ZVTdM4lJc9lprc2xLybnlqcrCXg6aQR0w3lcdD1WSnCPR1Tb+WQ5yhgAGwE1mdaF9FdKevEe//rR+IydVs4zfZK9Q96VNIGkLXvSuZ7ikgztLm1O2I9i15PH0jJ48kp4LshUkM+PJCvK7GMerXev2n+i20aNI/2p/K6QSEeVVDwDdksWgTDP6bAeGcPRIM6PEcorpyZymfI6tBVtE9PcVmKwY5Exr11pcK6D2YW4+K07prhUVZvzGn1Myfy6e91ymrgGItCjIEjclLXM8OBtmqEvTOKwCoRoQhI4Aj1JhyGeBNDIZv3Dc2OBG8FyE4UWkxpEyLhAZTxm0nThOKDLybK7TtiHwTVe4n2M/4K8e6BePvA3JLQfDshTLPAAC8oTbzYMmPwqos2krTU/OaKvbeOfIpS/IToKmDqNdFlT3CZ0X92IRVrZ/ZFYfdSfkq6fNYcM5fr/rpZ+/wgUjAOKrybvuw/zMtfWslsHSRi4CJr3H7EqdGJggi8ZRXVfKgMoz0yB6bQ1emdCOvsx7tlYmE4/0FxFvrDzn6jeSn99WxHlYmbSDUA+yH6MOHbbTeD9BAlRUd047daOOmKZX/y3kaEKX8=
+  file: ''
+  on:
+    repo: yahoo/yfuzz
+    tags: true

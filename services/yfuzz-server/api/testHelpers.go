@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 
 	"github.com/gorilla/mux"
-	"github.com/yahoo/yfuzz/config"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/config"
 )
 
 // Helper to take a bit of the repetition out of testing endpoints

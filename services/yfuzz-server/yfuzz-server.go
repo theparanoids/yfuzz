@@ -15,16 +15,17 @@ import (
 	"github.com/gorilla/mux"
 	jww "github.com/spf13/jwalterweatherman"
 	"github.com/spf13/viper"
-	"github.com/yahoo/yfuzz/api"
-	"github.com/yahoo/yfuzz/auth/athenz"
-	"github.com/yahoo/yfuzz/config"
-	"github.com/yahoo/yfuzz/kubernetes"
+	"github.com/yahoo/yfuzz/pkg/version"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/api"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/auth/athenz"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/config"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/kubernetes"
 )
 
 func main() {
 	config.Init()
 
-	jww.INFO.Printf("YFuzz version %s\n", config.Version)
+	jww.INFO.Printf("YFuzz %s, built on %s\n", version.Version, version.Timestamp)
 
 	router := mux.NewRouter()
 	kubernetesAPI, err := kubernetes.New()

@@ -11,10 +11,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Version holds the current version of YFuzz.
-// Injected by the linker, see build.sh
-var Version string
-
 // Init reads in configuration from a configuration file and environment variables.
 func Init() {
 	// Set some sensible defaults

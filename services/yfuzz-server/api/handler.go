@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	jww "github.com/spf13/jwalterweatherman"
-	"github.com/yahoo/yfuzz/kubernetes"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/kubernetes"
 )
 
 // EndpointDependencies holds objects endpoints rely on, such as a Kubernetes or database connection.

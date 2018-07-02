@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	jww "github.com/spf13/jwalterweatherman"
-	"github.com/yahoo/yfuzz/api/schema"
+	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
 // ListJobs returns a list of all existing jobs on the cluster.

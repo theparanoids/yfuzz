@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/yahoo/yfuzz/api/schema"
-	"github.com/yahoo/yfuzz/kubernetes"
+	"github.com/yahoo/yfuzz/pkg/schema"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/kubernetes"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

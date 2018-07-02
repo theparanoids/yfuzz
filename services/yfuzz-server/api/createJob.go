@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	jww "github.com/spf13/jwalterweatherman"
-	"github.com/yahoo/yfuzz/api/schema"
+	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
 // CreateJob creates new YFuzz jobs.

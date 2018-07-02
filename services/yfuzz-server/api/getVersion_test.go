@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/yahoo/yfuzz/api/schema"
-	"github.com/yahoo/yfuzz/config"
+	"github.com/yahoo/yfuzz/pkg/schema"
+	"github.com/yahoo/yfuzz/pkg/version"
 )
 
 func TestGetVersion(t *testing.T) {
@@ -27,7 +27,7 @@ func TestGetVersion(t *testing.T) {
 		t.Errorf("Could not unmarshal version response, got error: %s", err.Error())
 	}
 
-	if response.Version != config.Version {
-		t.Errorf("Version endpoint returned %s instead of %s", response.Version, config.Version)
+	if response.Version != version.Version {
+		t.Errorf("Version endpoint returned %s instead of %s", response.Version, version.Version)
 	}
 }

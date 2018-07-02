@@ -8,7 +8,7 @@ import (
 
 	jww "github.com/spf13/jwalterweatherman"
 	"github.com/spf13/viper"
-	"github.com/yahoo/yfuzz/types"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/types"
 	corev1 "k8s.io/api/core/v1"
 )
 
