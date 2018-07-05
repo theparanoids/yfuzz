@@ -1,6 +1,14 @@
 # YFuzz Server
 
-The main API server for [YFuzz](../..README.md).
+The main API server for [YFuzz](https://github.com/yahoo/yfuzz).
+
+## Table of Contents
+- [YFuzz Server](#yfuzz-server)
+  - [Table of Contents](#table-of-contents)
+  - [Prerequisites:](#prerequisites)
+  - [Install](#install)
+  - [Configuration](#configuration)
+  - [Usage](#usage)
 
 ## Prerequisites: 
 To build the server, you will need [Go](https://golang.org/), [Glide](https://glide.sh/), and [Make](https://www.gnu.org/software/make/).
@@ -23,4 +31,4 @@ See `config-sample.yaml` for sample configuration.
 ## Usage
 API endpoints are documented with godoc. 
 
-YFuzz is currently accessible through the use of the YFuzz CLI. A web interface is also planned.
+YFuzz is currently accessible through the use of the [YFuzz CLI](../../cmd/yfuzz-cli). A web interface is also planned.

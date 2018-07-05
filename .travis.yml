@@ -8,13 +8,19 @@ addons:
     - glide
 branches:
   only: master
+
+# One job per project in the monorepo, denoted by the JOB environment variable
 jobs:
   include:
   - env: JOB=yfuzz-server
     language: go
+  - env: JOB=yfuzz-cli
+    language: go
+
+# Make will handle the actual building
 script:
 - source ./scripts/git_version.sh
-- case $JOB in "yfuzz-server") make --directory=services/yfuzz-server ;; esac
+- make subproject target=$JOB verbose=true
 
 # If the build succeeded, push a tag
 before_deploy:

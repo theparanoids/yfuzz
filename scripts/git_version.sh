@@ -41,5 +41,5 @@ case "$TRAVIS_COMMIT_MESSAGE" in
     echo 'Include "Semver: Major|Minor|Patch" in your commit message to bump version.'
 esac
 
-YFUZZ_BUILD_VERSION="v$MAJOR.$MINOR.$PATCH"
+export YFUZZ_BUILD_VERSION="v$MAJOR.$MINOR.$PATCH"
 echo New version is $YFUZZ_BUILD_VERSION

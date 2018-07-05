@@ -1,5 +1,7 @@
 # YFuzz
 
+[![Build Status](https://travis-ci.org/yahoo/yfuzz.svg?branch=master)](https://travis-ci.org/yahoo/yfuzz)
+
 YFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 
 ## Table of Contents
@@ -19,7 +21,8 @@ YFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 Popular fuzzers such as [Libfuzzer](https://llvm.org/docs/LibFuzzer.html) and [AFL](http://lcamtuf.coredump.cx/afl/) have support for running multiple fuzzing processes at once. YFuzz aims to take advantage of this by running each process on a different Kubernetes pod to speed up the fuzzing process.
 
 ## Projects
-* [YFuzz Server](services/yfuzz-server/README.md): The main API server for YFuzz.
+* [YFuzz Server](services/yfuzz-server): The main API server for YFuzz.
+* [YFuzz CLI](cmd/yfuzz-cli): A command-line interface for interacting with the YFuzz server.
 
 ## Architecture
 ![Architecture Diagram](architecture.png)
@@ -31,6 +34,7 @@ The YFuzz API resides in a kubernetes cluster along with the pods that run the f
 * The YFuzz API will have access to a data store with information about users, jobs, and crash files.
 
 ## Directory Structure
+* `cmd`: Command line utilities.
 * `pkg`: Shared libraries and packages.
 * `scripts`: Scripts for CI tooling.
 * `services`: Long-running services, such as the yfuzz-server.

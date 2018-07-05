@@ -1,0 +1,11 @@
+package: github.com/yahoo/yfuzz/cmd/yfuzz-cli
+ignore:
+- github.com/yahoo/yfuzz/pkg/schema
+- github.com/yahoo/yfuzz/pkg/version
+import:
+- package: github.com/fatih/color
+  version: ^1.7.0
+- package: gopkg.in/urfave/cli.v1
+  version: ^1.20.0
+- package: github.com/spf13/viper
+  version: ^1.0.2
