@@ -36,7 +36,10 @@ func Endpoint(handler endpointFunc, dependencies EndpointDependencies) http.Hand
 
 		if data != nil {
 			w.Header().Set("content-type", "application/json")
-			w.Write(marshaledResponse)
+			_, err := w.Write(marshaledResponse)
+			if err != nil {
+				jww.WARN.Printf("Failed to serialize error: %s\n", err.Error())
+			}
 		}
 	})
 }
@@ -47,9 +50,9 @@ type messageHolder struct {
 }
 
 func responseMessage(message string, i ...interface{}) messageHolder {
-	return messageHolder{fmt.Sprintf(message, i...)}
+	return messageHolder{Message: fmt.Sprintf(message, i...)}
 }
 
 func responseFromError(err error) messageHolder {
-	return messageHolder{err.Error()}
+	return messageHolder{Message: err.Error()}
 }

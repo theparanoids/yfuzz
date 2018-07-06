@@ -22,9 +22,16 @@ clean:
 
 deps:
 	glide install
+ifndef TRAVIS
+	go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+endif
 
 lint:
-	gometalinter --tests --vendor --disable-all --enable=goimports --enable=vet --enable=golint ./...
+ifdef TRAVIS
+	@echo Skipping lint in Travis, linting is done by https://golangci.com/
+else
+	golangci-lint run -E golint -E interfacer -E unconvert -E goconst -E goimports ./...
+endif
 
 test:
 	go test -v ./...

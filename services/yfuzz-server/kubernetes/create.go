@@ -91,7 +91,10 @@ func (k API) CreateJob(name, registryLink string) (*batchv1.Job, error) {
 	}
 
 	var rawJob bytes.Buffer
-	jobTemplate.Execute(&rawJob, opts)
+	err = jobTemplate.Execute(&rawJob, opts)
+	if err != nil {
+		return nil, err
+	}
 
 	decode := scheme.Codecs.UniversalDeserializer().Decode
 
