@@ -21,7 +21,7 @@ else
 	echo "No semantic versioning tag found, defaulting to v0.0.1."
 fi
 
-printf "Commit message from Travis:\n%s\n\n" $TRAVIS_COMMIT_MESSAGE
+printf "Commit message from Travis:\n%s\n\n" "$TRAVIS_COMMIT_MESSAGE"
 
 case "$TRAVIS_COMMIT_MESSAGE" in
   *[Ss]"emver: "[Mm]"ajor"*)
