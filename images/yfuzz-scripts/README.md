@@ -13,7 +13,7 @@ Image containing scripts used by containers in [YFuzz](https://github.com/yahoo/
 Create an image that runs a fuzz target (e.g. with [Libfuzzer](https://llvm.org/docs/LibFuzzer.html)), and add the `yfuzz_init` script:
 
 ```Dockerfile
-COPY --from=yfuzz/yfuzz-scripts yfuzz_init.sh /
+COPY --from=yfuzz/scripts yfuzz_init.sh /
 CMD /yfuzz_init.sh
 ```
 

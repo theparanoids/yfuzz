@@ -14,13 +14,10 @@ build:
 	docker build -t ${TARGET} .
 
 deps:
-	@echo "Nothing to do."
 
 lint:
 	docker run --rm -i hadolint/hadolint < Dockerfile
 
 test:
-	@echo "Nothing to do."
 
 clean:
-	@echo "Nothing to do."

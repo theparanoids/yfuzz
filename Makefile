@@ -13,6 +13,8 @@ yfuzz-scripts-path := images/yfuzz-scripts
 yfuzz-cli-path := cmd/yfuzz-cli
 yfuzz-server-path := services/yfuzz-server
 
+# Images to be pushed to docker hub
+images := scripts
 
 define call_all
 	@$(foreach project,${projects},make --directory=${${project}-path} ${1}; echo;)
@@ -37,4 +39,20 @@ clean:
 subproject:
 	make --directory=${${target}-path}
 
-.PHONY: deps lint test clean subproject
+deploy-github:
+ifdef TRAVIS
+	@echo Tagging ${YFUZZ_BUILD_VERSION} on GitHub
+	@git config --global user.email "builds@travis-ci.com"
+	@git config --global user.name "Travis CI"
+	@git tag -a -m "Generated tag from TravisCI build ${TRAVIS_BUILD_NUMBER}" ${YFUZZ_BUILD_VERSION} 
+	@git push https://${GH_TOKEN}@github.com/yahoo/yfuzz.git ${YFUZZ_BUILD_VERSION} > /dev/null 2>&1 
+endif
+
+deploy-dockerhub:
+ifdef TRAVIS
+	@echo Pushing images to Docker Hub
+	@echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+	$(foreach image,${images},docker push yfuzz/${image})
+endif
+
+.PHONY: deps lint test clean subproject deploy-github deploy-dockerhub
