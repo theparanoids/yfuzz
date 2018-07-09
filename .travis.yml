@@ -16,6 +16,9 @@ jobs:
     language: go
   - env: JOB=yfuzz-cli
     language: go
+  - env: JOB=yfuzz-scripts
+    services:
+    - docker
 
 # Make will handle the actual building
 script:

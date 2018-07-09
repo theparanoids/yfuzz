@@ -8,9 +8,10 @@
 #
 
 # Information about projects, for calling the proper Makefiles
-projects := yfuzz-server yfuzz-cli
-yfuzz-server-path := services/yfuzz-server 
+projects := yfuzz-scripts yfuzz-cli yfuzz-server
+yfuzz-scripts-path := images/yfuzz-scripts
 yfuzz-cli-path := cmd/yfuzz-cli
+yfuzz-server-path := services/yfuzz-server
 
 
 define call_all

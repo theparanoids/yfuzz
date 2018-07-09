@@ -23,6 +23,7 @@ Popular fuzzers such as [Libfuzzer](https://llvm.org/docs/LibFuzzer.html) and [A
 ## Projects
 * [YFuzz Server](services/yfuzz-server): The main API server for YFuzz.
 * [YFuzz CLI](cmd/yfuzz-cli): A command-line interface for interacting with the YFuzz server.
+* [YFuzz Scripts](images/yfuzz-scripts): Docker image with scripts used by YFuzz containers.
 
 ## Architecture
 ![Architecture Diagram](architecture.png)
@@ -35,6 +36,7 @@ The YFuzz API resides in a kubernetes cluster along with the pods that run the f
 
 ## Directory Structure
 * `cmd`: Command line utilities.
+* `images`: Dockerfiles used by YFuzz.
 * `pkg`: Shared libraries and packages.
 * `scripts`: Scripts for CI tooling.
 * `services`: Long-running services, such as the yfuzz-server.
