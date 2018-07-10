@@ -41,4 +41,4 @@ jobs:
 # Make will handle the actual building
 script:
 - source ./scripts/git_version.sh
-- make subproject target=$JOB verbose=true
+- make travis target=$JOB verbose=true

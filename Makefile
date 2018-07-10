@@ -35,24 +35,20 @@ test:
 clean:
 	$(call call_all,clean)
 
-# Call a makefile of a specific subproject
-subproject:
-	make --directory=${${target}-path}
-
-deploy-github:
-ifdef TRAVIS
+# Call a makefile of a specific subproject, or a deploy step
+travis:
+ifeq (${target},deploy-github)
 	@echo Tagging ${YFUZZ_BUILD_VERSION} on GitHub
 	@git config --global user.email "builds@travis-ci.com"
 	@git config --global user.name "Travis CI"
 	@git tag -a -m "Generated tag from TravisCI build ${TRAVIS_BUILD_NUMBER}" ${YFUZZ_BUILD_VERSION} 
 	@git push https://${GH_TOKEN}@github.com/yahoo/yfuzz.git ${YFUZZ_BUILD_VERSION} > /dev/null 2>&1 
-endif
-
-deploy-dockerhub:
-ifdef TRAVIS
+else ifeq (${target},deploy-dockerhub)
 	@echo Pushing images to Docker Hub
 	@echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 	$(foreach image,${images},docker push yfuzz/${image})
+else
+	make --directory=${${target}-path}
 endif
 
 .PHONY: deps lint test clean subproject deploy-github deploy-dockerhub
