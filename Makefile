@@ -9,12 +9,15 @@
 
 # Information about projects, for calling the proper Makefiles
 projects := yfuzz-scripts yfuzz-cli yfuzz-server
-yfuzz-scripts-path := images/yfuzz-scripts
+yfuzz-scripts-path := images/scripts
 yfuzz-cli-path := cmd/yfuzz-cli
 yfuzz-server-path := services/yfuzz-server
 
 # Images to be pushed to docker hub
 images := scripts
+
+# General information
+GIT_SHA := $(shell git rev-parse --short HEAD)
 
 define call_all
 	@$(foreach project,${projects},make --directory=${${project}-path} ${1}; echo;)
@@ -46,7 +49,10 @@ ifeq (${target},deploy-github)
 else ifeq (${target},deploy-dockerhub)
 	@echo Pushing images to Docker Hub
 	@echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-	$(foreach image,${images},docker push yfuzz/${image})
+	for image in ${images}; do \
+		docker tag yfuzz/${image}:build-${GIT_SHA} yfuzz/${image}:latest; \
+		docker tag yfuzz/${image}:build-${GIT_SHA} yfuzz/${image}:${YFUZZ_BUILD_VERSION}; \
+	done
 else
 	make --directory=${${target}-path}
 endif

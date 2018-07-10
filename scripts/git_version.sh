@@ -37,7 +37,7 @@ case "$TRAVIS_COMMIT_MESSAGE" in
     echo "Semver: bumping patch version to $((++PATCH))."
     ;;
   *)
-    echo 'No version changes found.'
+    echo "No version changes found, bumping patch to $((++PATCH))."
     echo 'Include "Semver: Major|Minor|Patch" in your commit message to bump version.'
 esac
 
