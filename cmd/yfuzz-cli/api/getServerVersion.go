@@ -7,7 +7,8 @@ import (
 	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
-// GetServerVersion retrieves the version of the YFuzz server.
+// GetServerVersion retrieves the version of the yFuzz server.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#GetVersion
 func GetServerVersion() (string, error) {
 	var response schema.GetVersionResponse
 

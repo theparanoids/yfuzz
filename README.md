@@ -1,12 +1,12 @@
-# YFuzz
+# yFuzz
 
-[![Build Status](https://travis-ci.org/yahoo/yfuzz.svg?branch=master)](https://travis-ci.org/yahoo/yfuzz)
+[![Build Status](https://travis-ci.org/yahoo/yfuzz.svg?branch=master)](https://travis-ci.org/yahoo/yfuzz) ![godoc](https://godoc.org/github.com/yahoo/yfuzz?status.svg)
 
-YFuzz is a project for running fuzzing jobs at scale with Kubernetes.
+yFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 
 ## Table of Contents
 
-- [YFuzz](#yfuzz)
+- [yFuzz](#yfuzz)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
   - [Projects](#projects)
@@ -18,25 +18,26 @@ YFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 
 ## Background
 
-Popular fuzzers such as [Libfuzzer](https://llvm.org/docs/LibFuzzer.html) and [AFL](http://lcamtuf.coredump.cx/afl/) have support for running multiple fuzzing processes at once. YFuzz aims to take advantage of this by running each process on a different Kubernetes pod to speed up the fuzzing process.
+Popular fuzzers such as [Libfuzzer](https://llvm.org/docs/LibFuzzer.html) and [AFL](http://lcamtuf.coredump.cx/afl/) have support for running multiple fuzzing processes at once. yFuzz aims to take advantage of this by running each process on a different Kubernetes pod to speed up the fuzzing process.
 
 ## Projects
-* [YFuzz Server](services/yfuzz-server): The main API server for YFuzz.
-* [YFuzz CLI](cmd/yfuzz-cli): A command-line interface for interacting with the YFuzz server.
-* [YFuzz Scripts](images/yfuzz-scripts): Docker image with scripts used by YFuzz containers.
+* [yFuzz Server](services/yfuzz-server): The main API server for yFuzz.
+* [yFuzz CLI](cmd/yfuzz-cli): A command-line interface for interacting with the yFuzz server.
+* [yFuzz Scripts](images/yfuzz-scripts): Docker image with scripts used by yFuzz containers.
 
 ## Architecture
 ![Architecture Diagram](architecture.png)
 
-The YFuzz API resides in a kubernetes cluster along with the pods that run the fuzzing jobs and a shared volume that holds corpus data to be shared between the pods.
+The yFuzz API resides in a kubernetes cluster along with the pods that run the fuzzing jobs and a shared volume that holds corpus data to be shared between the pods.
 
 ### Planned:
 * Each fuzzing pod will have a logging sidecar which streams logs from the pod to a centralized logging service.
-* The YFuzz API will have access to a data store with information about users, jobs, and crash files.
+* The yFuzz API will have access to a data store with information about users, jobs, and crash files.
 
 ## Directory Structure
 * `cmd`: Command line utilities.
-* `images`: Dockerfiles used by YFuzz.
+* `docs`: Documentation relating to yFuzz.
+* `images`: Dockerfiles used by yFuzz.
 * `pkg`: Shared libraries and packages.
 * `scripts`: Scripts for CI tooling.
 * `services`: Long-running services, such as the yfuzz-server.

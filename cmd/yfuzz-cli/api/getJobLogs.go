@@ -10,7 +10,8 @@ import (
 	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
-// GetJobLogs retrieves the logs of a given YFuzz job
+// GetJobLogs retrieves the logs of a given yFuzz job, truncated to a given number of lines.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#GetJobLogs
 func GetJobLogs(job string, tail int) error {
 	color.Green("Getting logs for job %s...", job)
 

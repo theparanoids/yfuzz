@@ -16,14 +16,14 @@ import (
 // Handler for GET /jobs/:job/logs
 //
 // URL Parameters:
-//	- job: the name of the job (string)
+// - job: the name of the job (string)
 //
 // Query Parameters:
-//  - crashes_only: only show crashes (boolean)
-//  - tail: number of tail lines to truncate the log to
+// - crashes_only: only show crashes (boolean)
+// - tail: number of tail lines to truncate the log to (int)
 //
 // Response Fields:
-// 	- logs: logs from jobs
+// - logs: logs from jobs ([]string)
 func GetJobLogs(r *http.Request, dependencies EndpointDependencies) (int, interface{}) {
 	job := mux.Vars(r)["job"]
 	if job == "" {

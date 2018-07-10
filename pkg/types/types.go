@@ -3,10 +3,10 @@
 
 package types
 
-// PodStatus is an enum of possible YFuzz pod statuses.
+// PodStatus is an enum of possible yFuzz pod statuses.
 type PodStatus string
 
-// Available YFuzz pod statuses:
+// Available yFuzz pod statuses:
 // CrashFound: the pod found a crash.
 // NoCrash: the pod exited (e.g. due to timeout) without finding a crash.
 // Pending: the pod is waiting for an available node.

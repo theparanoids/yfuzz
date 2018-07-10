@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Init reads in configuration values.
+// Init reads in configuration values from configuration files.
 func Init() {
 	home := os.Getenv("HOME")
 

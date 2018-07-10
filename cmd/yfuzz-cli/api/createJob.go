@@ -8,7 +8,8 @@ import (
 	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
-// CreateJob creates a YFuzz job from a docker image
+// CreateJob creates a yFuzz job from a link to a docker image.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#CreateJob
 func CreateJob(image string) error {
 	color.Green("Creating job from image %s...", image)
 

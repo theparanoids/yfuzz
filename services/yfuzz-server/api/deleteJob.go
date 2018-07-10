@@ -10,14 +10,14 @@ import (
 	jww "github.com/spf13/jwalterweatherman"
 )
 
-// DeleteJob removes YFuzz jobs.
+// DeleteJob removes yFuzz jobs.
 // Handler for DELETE /jobs/:job
 //
 // URL Parameters:
-//	- job: the name of the job (string)
+// - job: the name of the job (string)
 //
 // Response Fields:
-//	- none
+// - none
 func DeleteJob(r *http.Request, dependencies EndpointDependencies) (int, interface{}) {
 	job := mux.Vars(r)["job"]
 	if job == "" {

@@ -10,7 +10,8 @@ import (
 	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
-// GetJobStatus retrieves the status of a YFuzz job
+// GetJobStatus retrieves the status of a yFuzz job.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#GetJobStatus
 func GetJobStatus(job string) error {
 	color.Green("Getting job %s...", job)
 

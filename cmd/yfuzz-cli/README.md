@@ -1,11 +1,13 @@
-# YFuzz CLI
+# yFuzz CLI
 
-A simple command-line utility for [YFuzz](https://github.com/yahoo/yfuzz).
+![godoc](https://godoc.org/github.com/yahoo/yfuzz/cmd/yfuzz-cli?status.svg)
+
+A simple command-line utility for [yFuzz](https://github.com/yahoo/yfuzz).
 
 ![Diagram](/yfuzz.png)
 
 ## Table of Contents
-- [YFuzz CLI](#yfuzz-cli)
+- [yFuzz CLI](#yfuzz-cli)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites:](#prerequisites)
   - [Install](#install)
@@ -38,9 +40,9 @@ $ yfuzz-cli [COMMAND]
 * `help, h`: Shows a list of commands or help for one command
 
 ## Settings
-The YFuzz CLI will read configuration from a file called `cli-config.yaml` (or any other format supported by [viper](https://github.com/spf13/viper)) located either in `$HOME/.yfuzz`, `/etc/yfuzz`, or the current directory.
+The yFuzz CLI will read configuration from a file called `cli-config.yaml` (or any other format supported by [viper](https://github.com/spf13/viper)) located either in `$HOME/.yfuzz`, `/etc/yfuzz`, or the current directory.
 
-`api`: YFuzz server URL
+`api`: yFuzz server URL
 `athenz.user-cert`: Path to an Athenz user x509 certificate for authentication
 `athenz.user-key`: Path to the private key associated with the x509 certificate
 `athenz.ca-cert`: CA Cert used by the Athenz server

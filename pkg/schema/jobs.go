@@ -3,26 +3,26 @@
 
 package schema
 
-// ListJobsResponse ...
-// Schema for GET /jobs response
+// ListJobsResponse is the schema for the response from the GET /jobs endpoint.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#ListJobs
 type ListJobsResponse struct {
 	Jobs []string `json:"jobs"`
 }
 
-// CreateJobRequest ...
-// Schema for POST /jobs request
+// CreateJobRequest is the schema for the request to the POST /jobs endpoint.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#CreateJob
 type CreateJobRequest struct {
 	Image string `json:"image"`
 }
 
-// CreateJobResponse ...
-// Schema for POST /jobs response
+// CreateJobResponse is the schema for the response from the POST /jobs endpoint.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#CreateJob
 type CreateJobResponse struct {
 	Job string `json:"job"`
 }
 
-// GetJobStatusResponse ...
-// Schema for GET /jobs/:job response
+// GetJobStatusResponse is the schema for the respone from the GET /jobs/:job endpoint.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#GetJobStatus
 type GetJobStatusResponse struct {
 	StatusCrashFound int `json:"crash_found"`
 	StatusNoCrash    int `json:"no_crash"`
@@ -32,8 +32,8 @@ type GetJobStatusResponse struct {
 	StatusUnknown    int `json:"unknown"`
 }
 
-// GetJobLogsResponse ...
-// Schema for GET /jobs/:job/logs response
+// GetJobLogsResponse is the schema for the response from the GET /jobs/:job/logs endpoint.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#GetJobLogs
 type GetJobLogsResponse struct {
 	Logs []string `json:"logs"`
 }

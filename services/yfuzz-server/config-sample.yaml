@@ -22,13 +22,13 @@ auth:
 # Information for kubernetes and job configuration
 kubernetes:
   # Path to your kubeconfig (if running outside of a cluster)
-  # If unset, YFuzz will use a service account to authenticate
+  # If unset, yFuzz will use a service account to authenticate
   config-path: /path/to/kube/config
 
-  # Namespace for YFuzz to use
+  # Namespace for yFuzz to use
   namespace: default
 
-  # Config for YFuzz jobs
+  # Config for yFuzz jobs
   job-config:
     # Number of concurrent pods to run per job
     parallelism: 1
@@ -38,7 +38,7 @@ kubernetes:
 
     # Configuration for the logging sidecar and output format
     log:
-      # YFuzz will tail the log of a pod and look for a specified string to indicate success
+      # yFuzz will tail the log of a pod and look for a specified string to indicate success
       crash-found-message: SUCCESS
       tail-lines: 5
 

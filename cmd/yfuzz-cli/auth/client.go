@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// GetClient creates a client with the proper certs to access the YFuzz api
+// GetClient creates a client with the proper credentials to access the yFuzz API.
 func GetClient() (*http.Client, error) {
 	keyPEMBlock, err := ioutil.ReadFile(viper.GetString("athenz.user-key"))
 	if err != nil {

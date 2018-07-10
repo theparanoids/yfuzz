@@ -1,9 +1,11 @@
-# YFuzz Server
+# yFuzz Server
 
-The main API server for [YFuzz](https://github.com/yahoo/yfuzz).
+![godoc](https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server?status.svg)
+
+The main API server for [yFuzz](https://github.com/yahoo/yfuzz).
 
 ## Table of Contents
-- [YFuzz Server](#yfuzz-server)
+- [yFuzz Server](#yfuzz-server)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites:](#prerequisites)
   - [Install](#install)
@@ -22,7 +24,7 @@ $ make install
 ```
 
 ## Configuration
-YFuzz will read configuration from a file called `config.yaml` (or any other format supported by [viper](https://github.com/spf13/viper)) located either in `$HOME/.yfuzz`, `/etc/yfuzz`, or the current directory.
+yFuzz will read configuration from a file called `config.yaml` (or any other format supported by [viper](https://github.com/spf13/viper)) located either in `$HOME/.yfuzz`, `/etc/yfuzz`, or the current directory.
 
 Options can also be specified in environment variables with the `YFUZZ_` prefix.
 
@@ -31,4 +33,4 @@ See `config-sample.yaml` for sample configuration.
 ## Usage
 API endpoints are documented with godoc. 
 
-YFuzz is currently accessible through the use of the [YFuzz CLI](../../cmd/yfuzz-cli). A web interface is also planned.
+yFuzz is currently accessible through the use of the [yFuzz CLI](../../cmd/yfuzz-cli). A web interface is also planned.

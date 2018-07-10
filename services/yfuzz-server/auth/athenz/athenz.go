@@ -72,7 +72,7 @@ func getAuthorization(verifiedChains [][]*x509.Certificate) (bool, error) {
 	return false, nil
 }
 
-// Verify checks that the user making the request has access to the YFuzz service in Athenz.
+// Verify checks that the user making the request has access to the yFuzz service in Athenz.
 func Verify(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authorized, err := getAuthorization(r.TLS.VerifiedChains)

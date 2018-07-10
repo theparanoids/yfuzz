@@ -9,7 +9,8 @@ import (
 	"github.com/fatih/color"
 )
 
-// DeleteJob deletes the given YFuzz job.
+// DeleteJob deletes the given yFuzz job.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#DeleteJob
 func DeleteJob(job string) error {
 	color.Green("Deleting job %s...", job)
 

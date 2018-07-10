@@ -1,6 +1,6 @@
 # Information for kubernetes and job configuration
 kubernetes:
-  # Config for YFuzz jobs
+  # Config for yFuzz jobs
   job-config:
     # Number of concurrent pods to run per job
     parallelism: 3
@@ -10,7 +10,7 @@ kubernetes:
 
     # Configuration for the logging sidecar
     log:
-      # YFuzz will tail the log of a pod and look for a specified string to indicate success
+      # yFuzz will tail the log of a pod and look for a specified string to indicate success
       crash-found-message: SUCCESS
       tail-lines: 5
 

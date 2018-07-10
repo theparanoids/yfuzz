@@ -14,15 +14,14 @@ import (
 	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
-// CreateJob creates new YFuzz jobs.
+// CreateJob creates new yFuzz jobs.
 // Handler for POST /jobs
 //
 // Body Parameters:
-//	- image: link to a docker image for a YFuzz job (string)
+// - image: link to a docker image for a yFuzz job (string)
 //
 // Response Fields:
-//	- job: name of the created job (string)
-//
+// - job: name of the created job (string)
 func CreateJob(r *http.Request, dependencies EndpointDependencies) (int, interface{}) {
 	params := &schema.CreateJobRequest{}
 

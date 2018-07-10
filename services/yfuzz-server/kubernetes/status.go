@@ -8,7 +8,7 @@ import (
 
 	jww "github.com/spf13/jwalterweatherman"
 	"github.com/spf13/viper"
-	"github.com/yahoo/yfuzz/services/yfuzz-server/types"
+	"github.com/yahoo/yfuzz/pkg/types"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -49,7 +49,7 @@ func (k API) getFinishedPodStatus(podName string) types.PodStatus {
 	return types.StatusNoCrash
 }
 
-// Convert a kubernetes pod phase into a YFuzz pod status
+// Convert a kubernetes pod phase into a yFuzz pod status
 func podPhaseToPodStatus(podPhase corev1.PodPhase) types.PodStatus {
 	switch podPhase {
 	case corev1.PodPending:
@@ -61,7 +61,7 @@ func podPhaseToPodStatus(podPhase corev1.PodPhase) types.PodStatus {
 	case corev1.PodUnknown:
 		return types.StatusUnknown
 	default:
-		jww.WARN.Printf("Faield to convert %s to YFuzz Job Status.\n", podPhase)
+		jww.WARN.Printf("Faield to convert %s to yFuzz Job Status.\n", podPhase)
 		return types.StatusUnknown
 	}
 }

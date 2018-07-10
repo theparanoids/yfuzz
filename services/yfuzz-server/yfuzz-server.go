@@ -25,7 +25,7 @@ import (
 func main() {
 	config.Init()
 
-	jww.INFO.Printf("YFuzz %s, built on %s\n", version.Version, version.Timestamp)
+	jww.INFO.Printf("yFuzz %s, built on %s\n", version.Version, version.Timestamp)
 
 	router := mux.NewRouter()
 	kubernetesAPI, err := kubernetes.New()

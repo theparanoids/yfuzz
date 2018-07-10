@@ -1,5 +1,5 @@
 #
-# Makefile to recursively test all subprojects of YFuzz with their own Makefiles
+# Makefile to recursively test all subprojects of yFuzz with their own Makefiles
 #
 # Copyright 2018 Oath, Inc.
 # Licensed under the terms of the Apache version 2.0 license. See LICENSE file for terms.
@@ -20,7 +20,7 @@ images := scripts
 GIT_SHA := $(shell git rev-parse --short HEAD)
 
 define call_all
-	@$(foreach project,${projects},make --directory=${${project}-path} ${1}; echo;)
+	@$(foreach project,${projects},make --directory=${${project}-path} ${1} || STATUS=$$? && echo; && if [[ $${STATUS} -ne 0 ]]; then exit $${STATUS}; fi;)
 endef
 
 all: deps lint test

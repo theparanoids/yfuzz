@@ -3,8 +3,8 @@
 
 package schema
 
-// GetVersionResponse ...
-// Schema for GET /version response
+// GetVersionResponse is the schema for the response from the GET /version endpoint.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#GetVersion
 type GetVersionResponse struct {
 	Version string `json:"version"`
 }

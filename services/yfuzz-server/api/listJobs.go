@@ -14,10 +14,10 @@ import (
 // Handler for GET /jobs
 //
 // Parameters:
-//	- none
+// - none
 //
 // Response Fields:
-//	- jobs: all YFuzz jobs (array of strings)
+// - jobs: all yFuzz jobs ([]string)
 func ListJobs(r *http.Request, dependencies EndpointDependencies) (int, interface{}) {
 	jobs, err := dependencies.Kubernetes.ListJobs()
 	if err != nil {

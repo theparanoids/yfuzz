@@ -14,10 +14,10 @@ import (
 // Handler for GET /version
 //
 // Parameters:
-//	- none
+// - none
 //
 // Response Fields:
-//	- version: version of the YFuzz server (string)
+// - version: version of the yFuzz server (string)
 func GetVersion(r *http.Request, _ EndpointDependencies) (int, interface{}) {
 	return http.StatusOK, schema.GetVersionResponse{Version: version.Version}
 }

@@ -8,7 +8,8 @@ import (
 	"github.com/yahoo/yfuzz/pkg/schema"
 )
 
-// ListJobs lists all of the existing YFuzz jobs
+// ListJobs lists all of the existing yFuzz jobs.
+// See https://godoc.org/github.com/yahoo/yfuzz/services/yfuzz-server/api#ListJobs
 func ListJobs() error {
 	color.Green("Listing all jobs...")
 

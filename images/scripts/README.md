@@ -1,9 +1,9 @@
-# YFuzz Scripts
+# yFuzz Scripts
 
-Image containing scripts used by containers in [YFuzz](https://github.com/yahoo/yfuzz).
+Image containing scripts used by containers in [yFuzz](https://github.com/yahoo/yfuzz).
 
 ## Table of Contents
-- [YFuzz Scripts](#yfuzz-scripts)
+- [yFuzz Scripts](#yfuzz-scripts)
   - [Table of Contents](#table-of-contents)
   - [Usage](#usage)
     - [Environment Variables](#environment-variables)
@@ -20,13 +20,13 @@ CMD /yfuzz_init.sh
 ### Environment Variables
 
 Variables needed by the script:
-* `YFUZZ_PROJECT`: Name of the YFuzz Project  
-* `YFUZZ_TARGET`: Name of the target within the YFuzz project
+* `YFUZZ_PROJECT`: Name of the yFuzz Project.
+* `YFUZZ_TARGET`: Name of the target within the yFuzz project.
 * `FUZZER_COMMAND`: Command to run the fuzzer.
 
 Optional variables:
 * `SEED_CORPUS_DIR`: Path to a folder of seed inputs to be copied to the corpus.
 
-YFuzz will set the following environment variables for use by the fuzzer:
+yFuzz will set the following environment variables for use by the fuzzer:
 * `CORPUS_DIR`: Path to a directory for corpus files to be shared between pods.
 * `CRASH_FILE`: Location to write a file with information about a crash, when one is found.
