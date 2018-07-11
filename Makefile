@@ -50,8 +50,10 @@ else ifeq (${target},deploy-dockerhub)
 	@echo Pushing images to Docker Hub
 	@echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 	for image in ${images}; do \
+		docker pull yfuzz/$${image}:build-${GIT_SHA}
 		docker tag yfuzz/$${image}:build-${GIT_SHA} yfuzz/$${image}:latest; \
 		docker tag yfuzz/$${image}:build-${GIT_SHA} yfuzz/$${image}:${YFUZZ_BUILD_VERSION}; \
+		docker push yfuzz/$${image}
 	done
 else
 	make --directory=${${target}-path}
