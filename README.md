@@ -22,10 +22,19 @@ yFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 
 Popular fuzzers such as [Libfuzzer](https://llvm.org/docs/LibFuzzer.html) and [AFL](http://lcamtuf.coredump.cx/afl/) have support for running multiple fuzzing processes at once. yFuzz aims to take advantage of this by running each process on a different Kubernetes pod to speed up the fuzzing process.
 
+For open-source projects, this can be done with [OSS-Fuzz](https://github.com/google/oss-fuzz), with some restrictions:
+* The targeted project must be open-source and widely used
+* The targeted project must be accepted by the OSS-Fuzz team
+* Details such as timeouts and available fuzzers are limited by OSS-Fuzz
+
+yFuzz aims to be an on-premises solution for distributed fuzzing, so that projects that don't meet these constraints can still be fuzzed.
+
+Additional features to make the fuzzing process easier are also planned, such as automatic generation/suggestion of fuzz targets. We welcome all feedback and suggestions as we consider other use-cases.
+
 ## Projects
 * [yFuzz Server](services/yfuzz-server): The main API server for yFuzz.
 * [yFuzz CLI](cmd/yfuzz-cli): A command-line interface for interacting with the yFuzz server.
-* [yFuzz Scripts](images/yfuzz-scripts): Docker image with scripts used by yFuzz containers.
+* [yFuzz Scripts](images/scripts): Docker image with scripts used by yFuzz containers.
 
 ## Architecture
 ![Architecture Diagram](architecture.png)
