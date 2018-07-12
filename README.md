@@ -4,6 +4,8 @@
 
 yFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 
+**It is still in early development and not ready for general use.**
+
 ## Table of Contents
 
 - [yFuzz](#yfuzz)
