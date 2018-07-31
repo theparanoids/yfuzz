@@ -8,16 +8,16 @@ tls:
   cert-file: /path/to/cert/file
   key-file: /path/to/key/file
 
-# Information for authentication/authorization
-auth:
+# Information for plugins. Plugins are registered in the order declared in the config file.
+plugins:
   # Information for Athenz (see http://athenz.io/)
-  athenz:
-    url: https://your-athenz-server.com/zms/v1
-    cert-file: /path/to/athenz/cert
-    key-file: /path/to/athenz/key
-    ca-issuer-name: Athenz CA Name
-    action: access
-    resource: yfuzz:yfuzz
+  - athenz:
+      url: https://your-athenz-server.com/zms/v1
+      cert-file: /path/to/athenz/cert
+      key-file: /path/to/athenz/key
+      ca-issuer-name: Athenz CA Name
+      action: access
+      resource: yfuzz:yfuzz
 
 # Information for kubernetes and job configuration
 kubernetes:

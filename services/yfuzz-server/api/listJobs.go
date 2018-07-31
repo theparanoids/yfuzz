@@ -22,7 +22,7 @@ func ListJobs(r *http.Request, dependencies EndpointDependencies) (int, interfac
 	jobs, err := dependencies.Kubernetes.ListJobs()
 	if err != nil {
 		jww.WARN.Println(err.Error())
-		return http.StatusInternalServerError, responseFromError(err)
+		return http.StatusInternalServerError, ResponseFromError(err)
 	}
 
 	return http.StatusOK, schema.ListJobsResponse{Jobs: jobs}

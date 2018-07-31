@@ -21,13 +21,13 @@ import (
 func DeleteJob(r *http.Request, dependencies EndpointDependencies) (int, interface{}) {
 	job := mux.Vars(r)["job"]
 	if job == "" {
-		return http.StatusBadRequest, responseMessage("\"job\" is required.")
+		return http.StatusBadRequest, ResponseMessage("\"job\" is required.")
 	}
 
 	err := dependencies.Kubernetes.DeleteJob(job)
 	if err != nil {
 		jww.WARN.Println(err.Error())
-		return http.StatusInternalServerError, responseFromError(err)
+		return http.StatusInternalServerError, ResponseFromError(err)
 	}
 
 	jww.INFO.Printf("Job %s deleted.\n", job)

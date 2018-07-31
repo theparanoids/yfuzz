@@ -5,20 +5,12 @@ package config
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/viper"
 )
 
 // Init reads in configuration values from configuration files.
 func Init() {
-	home := os.Getenv("HOME")
-
-	// Set the defaults
-	viper.SetDefault("athenz.user-cert", home+"/.yfuzz/certs/userx509.pem")
-	viper.SetDefault("athenz.user-key", home+"/.yfuzz/certs/userkey.pem")
-	viper.SetDefault("athenz.ca-cert", home+"/.yfuzz/certs/athenz-ca.pem")
-
 	// Override from file if present
 	viper.SetConfigName("cli-config")
 	viper.AddConfigPath(".")

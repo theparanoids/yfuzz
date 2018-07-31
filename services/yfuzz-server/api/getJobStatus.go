@@ -28,13 +28,13 @@ import (
 func GetJobStatus(r *http.Request, dependencies EndpointDependencies) (int, interface{}) {
 	job := mux.Vars(r)["job"]
 	if job == "" {
-		return http.StatusBadRequest, responseMessage("\"job\" is required.")
+		return http.StatusBadRequest, ResponseMessage("\"job\" is required.")
 	}
 
 	status, err := dependencies.Kubernetes.GetJobStatus(job)
 	if err != nil {
 		jww.WARN.Println(err.Error())
-		return http.StatusInternalServerError, responseFromError(err)
+		return http.StatusInternalServerError, ResponseFromError(err)
 	}
 
 	return http.StatusOK, schema.GetJobStatusResponse{

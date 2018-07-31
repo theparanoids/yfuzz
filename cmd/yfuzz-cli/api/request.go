@@ -11,12 +11,8 @@ import (
 	"net/http"
 
 	"github.com/spf13/viper"
-	"github.com/yahoo/yfuzz/cmd/yfuzz-cli/auth"
+	"github.com/yahoo/yfuzz/pkg/schema"
 )
-
-type messageHolder struct {
-	Message string `json:"message"`
-}
 
 func get(endpoint string, result interface{}) error {
 	path := viper.GetString("api") + endpoint
@@ -61,7 +57,7 @@ func delete(endpoint string) error {
 
 // Send a request to the API with the appropriate headers
 func request(req *http.Request, res interface{}) error {
-	client, err := auth.GetClient()
+	client, err := newClient()
 	if err != nil {
 		return err
 	}
@@ -79,18 +75,15 @@ func request(req *http.Request, res interface{}) error {
 		return err
 	}
 
-	// See if there's a JSON "message" field returned by yfuzz:
-	var mh messageHolder
-	var message string
-
-	err = json.Unmarshal(contents, &mh)
-	if err != nil {
-		message = string(contents)
-	} else {
-		message = mh.Message
-	}
-
+	// Handle errors
 	if isError(resp.StatusCode) {
+		var mh schema.MessageHolder
+		var message string
+		if err = json.Unmarshal(contents, &mh); err != nil {
+			message = string(contents)
+		} else {
+			message = mh.Message
+		}
 		return fmt.Errorf("%d: %s", resp.StatusCode, message)
 	}
 

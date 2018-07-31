@@ -29,19 +29,19 @@ func CreateJob(r *http.Request, dependencies EndpointDependencies) (int, interfa
 	decoder.DisallowUnknownFields()
 	err := decoder.Decode(params)
 	if err != nil {
-		return http.StatusBadRequest, responseFromError(err)
+		return http.StatusBadRequest, ResponseFromError(err)
 	}
 
 	jobName, err := extractName(params.Image)
 	if err != nil {
-		return http.StatusBadRequest, responseFromError(err)
+		return http.StatusBadRequest, ResponseFromError(err)
 	}
 
 	_, err = dependencies.Kubernetes.CreateJob(jobName, params.Image)
 	if err != nil {
 		// TODO: return 409 if conflict
 		jww.WARN.Println(err.Error())
-		return http.StatusInternalServerError, responseFromError(err)
+		return http.StatusInternalServerError, ResponseFromError(err)
 	}
 
 	jww.INFO.Printf("Created job %s\n", jobName)

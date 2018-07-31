@@ -17,10 +17,29 @@ import (
 	"github.com/spf13/viper"
 	"github.com/yahoo/yfuzz/pkg/version"
 	"github.com/yahoo/yfuzz/services/yfuzz-server/api"
-	"github.com/yahoo/yfuzz/services/yfuzz-server/auth/athenz"
 	"github.com/yahoo/yfuzz/services/yfuzz-server/config"
 	"github.com/yahoo/yfuzz/services/yfuzz-server/kubernetes"
+	"github.com/yahoo/yfuzz/services/yfuzz-server/plugins"
 )
+
+// Helper for converting the string loaded from the settings file to the correct type
+func stringToAuthType(s string) tls.ClientAuthType {
+	switch s {
+	case "NoClientCert":
+		return tls.NoClientCert
+	case "RequestClientCert":
+		return tls.RequestClientCert
+	case "RequireAnyClientCert":
+		return tls.RequireAnyClientCert
+	case "VerifyClientCertIfGiven":
+		return tls.VerifyClientCertIfGiven
+	case "RequireAndVerifyClientCert":
+		return tls.RequireAndVerifyClientCert
+	default:
+		jww.WARN.Printf("Warning: %s is not a valid client auth type.\n", s)
+		return tls.VerifyClientCertIfGiven
+	}
+}
 
 func main() {
 	config.Init()
@@ -28,6 +47,18 @@ func main() {
 	jww.INFO.Printf("yFuzz %s, built on %s\n", version.Version, version.Timestamp)
 
 	router := mux.NewRouter()
+
+	// Add some basic wrappers to log requests and catch panics
+	accessFile, err := os.OpenFile(viper.GetString("access-log-file"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		panic(fmt.Errorf("fatal error opening access log file: %s", err))
+	}
+	router.Use(handlers.RecoveryHandler())
+	router.Use(func(h http.Handler) http.Handler {
+		return handlers.CombinedLoggingHandler(accessFile, h)
+	})
+
+	// Set up dependencies for endpoints
 	kubernetesAPI, err := kubernetes.New()
 	if err != nil {
 		panic(fmt.Sprintf("Could not connect to kubernetes API: %s", err.Error()))
@@ -44,54 +75,37 @@ func main() {
 	router.Methods("POST").Path("/jobs").Handler(api.Endpoint(api.CreateJob, dependencies))
 	router.Methods("DELETE").Path("/jobs/{job}").Handler(api.Endpoint(api.DeleteJob, dependencies))
 
-	// Launch the server
-	port := viper.GetString("port")
-	jww.INFO.Printf("About to listen on %s\n", port)
-	caCert, err := ioutil.ReadFile(viper.GetString("tls.ca-cert-file"))
-	if err != nil {
-		panic("Can't read TLS cert file! " + err.Error())
-	}
-	caCertPool := x509.NewCertPool()
-	caCertPool.AppendCertsFromPEM(caCert)
+	// Register plugins
+	plugins.Register(router, dependencies)
 
+	// Set up TLS
+	// Different authentication plugsins will require different client auth types.
 	tlsConfig := &tls.Config{
-		ClientCAs:  caCertPool,
-		ClientAuth: tls.RequireAndVerifyClientCert,
+		ClientAuth: stringToAuthType(viper.GetString("tls.client-auth-type")),
 	}
-	tlsConfig.BuildNameToCertificate()
 
+	// Optional: require certificates to be signed by a custom CA.
+	if caCertFile := viper.GetString("tls.ca-cert-file"); caCertFile != "" {
+		caCertBlock, err := ioutil.ReadFile(caCertFile)
+		if err != nil {
+			panic("Can't read TLS cert file! " + err.Error())
+		}
+		caCertPool := x509.NewCertPool()
+		caCertPool.AppendCertsFromPEM(caCertBlock)
+		tlsConfig.ClientCAs = caCertPool
+	}
+
+	port := viper.GetString("port")
 	server := &http.Server{
 		Addr:      ":" + port,
-		Handler:   addHandlers(router),
+		Handler:   router,
 		TLSConfig: tlsConfig,
 	}
 
 	cert := viper.GetString("tls.cert-file")
 	key := viper.GetString("tls.key-file")
+
+	// Launch the server
+	jww.INFO.Printf("About to listen on %s\n", port)
 	jww.FATAL.Println(server.ListenAndServeTLS(cert, key))
-}
-
-// Wrap the router with handlers for logging, panic recovery
-func addHandlers(router http.Handler) http.Handler {
-	accessFile, err := os.OpenFile(viper.GetString("access-log-file"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		panic(fmt.Errorf("fatal error opening access log file: %s", err))
-	}
-
-	serverHandlers := []func(http.Handler) http.Handler{
-		// Write all requests to a log file
-		func(r http.Handler) http.Handler { return handlers.CombinedLoggingHandler(accessFile, r) },
-
-		// Recover from panics and return 500
-		handlers.RecoveryHandler(),
-
-		// Verify that the user is on the whitelist
-		athenz.Verify,
-	}
-
-	for _, h := range serverHandlers {
-		router = h(router)
-	}
-
-	return router
 }

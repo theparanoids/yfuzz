@@ -1,10 +1,10 @@
-# Getting Started with yFuzz
+# Using yFuzz
 This document will help you get started with [yFuzz](https://github.com/yahoo/yfuzz). It assumes you already have a basic knowledge of fuzzing and building Docker images.
 
 If you've never used a fuzzer before, Google has an excellent tutorial on using [LibFuzzer](https://github.com/google/fuzzer-test-suite/blob/master/tutorial/libFuzzerTutorial.md).
 
 ## Table of Contents
-- [Getting Started with yFuzz](#getting-started-with-yfuzz)
+- [Using yFuzz](#using-yfuzz)
   - [Table of Contents](#table-of-contents)
   - [Create a Fuzzing Image](#create-a-fuzzing-image)
   - [Add yFuzz Scripts](#add-yfuzz-scripts)

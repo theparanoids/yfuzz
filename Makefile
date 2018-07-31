@@ -20,7 +20,7 @@ images := scripts
 GIT_SHA := $(shell git rev-parse --short HEAD)
 
 define call_all
-	@$(foreach project,${projects},make --directory=${${project}-path} ${1} || STATUS=$$? && echo; && if [[ $${STATUS} -ne 0 ]]; then exit $${STATUS}; fi;)
+	@$(foreach project,${projects},make --directory=${${project}-path} ${1} || STATUS=$$? && echo && if [[ $${STATUS} -ne 0 ]]; then exit $${STATUS}; fi;)
 endef
 
 all: deps lint test

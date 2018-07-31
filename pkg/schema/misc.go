@@ -8,3 +8,8 @@ package schema
 type GetVersionResponse struct {
 	Version string `json:"version"`
 }
+
+// MessageHolder is a way to return a string that will serialize nicely.
+type MessageHolder struct {
+	Message string `json:"message"`
+}
