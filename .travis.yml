@@ -17,12 +17,15 @@ stages:
 # One job per project in the monorepo, denoted by the JOB environment variable
 jobs:
   include:
-  - env: JOB=yfuzz-server
-    stage: build
-    language: go
   - env: JOB=yfuzz-cli
     stage: build
     language: go
+  - env:
+    - JOB=yfuzz-server
+    - secure: "Rkl2aVRnReMQnwHwOR79n9T33HbOirnmLNEuRvdz6SYd9IqX1sW2Giy/wNEoPOeekZC18H4ue/+LaS/08ICF0GQNg/JCR4Hmr8AJapLspYmDekPTy337MYM+qdYures8YjXU3d+32ooAmRW+a3PHjNm8aHX++lXNs+FUTmJEvUqy5fD/OtdvEGxttmVwFwnT5S7ZAnOe7kYMzB7KCLmeL0+VlNaWGY8kjgWa2T0Su0VwGaCV1bazBCh3d2R6rjl+0NdCIJYuafQ00KfIWAjgL4wyCs/eWtuuHUfVWj9jwDBmg+oTaG/oPQ69XWD0qw/FSn9qjuYO4yM0Qh2hyAKj8pWZo1ICyi+JIkxySHRmDKXycJM6cMOOh8uBgdftgGGAbjiDpk7p1eFptk2hQ+A21tkVgs1s7fl0oW8wImZNhFkgoleaTzfALT5vL6b3rxYjXBvRrVzThRE1RK76leiZ0aGUZYWPCQgHu0xDGwVnUP38iH7Ks5HYpPj5h8Hb9+WdykTpGTkTyDmwF70iVHgEPiBDU08pcGwG6dq9Qtugc+l28vOgB+1UNEnprOQlrRFfwGq+iFpLoWlywx3zYqT6qW2Ke/7o/3CJey0Bk8/QCxUs6brqb6GBT06Fn50HW6Eb07PvpFd45ROoAxKhxcotUSErXa6F7ge+mctqnlA30+c="
+    stage: build
+    services:
+    - docker
   - env:
     - JOB=yfuzz-scripts
     - secure: "Rkl2aVRnReMQnwHwOR79n9T33HbOirnmLNEuRvdz6SYd9IqX1sW2Giy/wNEoPOeekZC18H4ue/+LaS/08ICF0GQNg/JCR4Hmr8AJapLspYmDekPTy337MYM+qdYures8YjXU3d+32ooAmRW+a3PHjNm8aHX++lXNs+FUTmJEvUqy5fD/OtdvEGxttmVwFwnT5S7ZAnOe7kYMzB7KCLmeL0+VlNaWGY8kjgWa2T0Su0VwGaCV1bazBCh3d2R6rjl+0NdCIJYuafQ00KfIWAjgL4wyCs/eWtuuHUfVWj9jwDBmg+oTaG/oPQ69XWD0qw/FSn9qjuYO4yM0Qh2hyAKj8pWZo1ICyi+JIkxySHRmDKXycJM6cMOOh8uBgdftgGGAbjiDpk7p1eFptk2hQ+A21tkVgs1s7fl0oW8wImZNhFkgoleaTzfALT5vL6b3rxYjXBvRrVzThRE1RK76leiZ0aGUZYWPCQgHu0xDGwVnUP38iH7Ks5HYpPj5h8Hb9+WdykTpGTkTyDmwF70iVHgEPiBDU08pcGwG6dq9Qtugc+l28vOgB+1UNEnprOQlrRFfwGq+iFpLoWlywx3zYqT6qW2Ke/7o/3CJey0Bk8/QCxUs6brqb6GBT06Fn50HW6Eb07PvpFd45ROoAxKhxcotUSErXa6F7ge+mctqnlA30+c="

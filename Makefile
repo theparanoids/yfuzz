@@ -14,13 +14,13 @@ yfuzz-cli-path := cmd/yfuzz-cli
 yfuzz-server-path := services/yfuzz-server
 
 # Images to be pushed to docker hub
-images := scripts
+images := scripts server
 
 # General information
 GIT_SHA := $(shell git rev-parse --short HEAD)
 
 define call_all
-	@$(foreach project,${projects},make --directory=${${project}-path} ${1} || STATUS=$$? && echo && if [[ $${STATUS} -ne 0 ]]; then exit $${STATUS}; fi;)
+	@$(foreach project,${projects},$(MAKE) --directory=${${project}-path} ${1} || STATUS=$$? && echo && if [[ $${STATUS} -ne 0 ]]; then exit $${STATUS}; fi;)
 endef
 
 all: deps lint test
@@ -49,14 +49,21 @@ ifeq (${target},deploy-github)
 else ifeq (${target},deploy-dockerhub)
 	@echo Pushing images to Docker Hub
 	@echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+	@TOKEN=$(shell curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${DOCKER_USERNAME}'", "password": "'${DOCKER_PASSWORD}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token >/dev/null 2>&1) ; \
 	for image in ${images}; do \
-		docker pull yfuzz/$${image}:build-${GIT_SHA}; \
-		docker tag yfuzz/$${image}:build-${GIT_SHA} yfuzz/$${image}:latest; \
-		docker tag yfuzz/$${image}:build-${GIT_SHA} yfuzz/$${image}:${YFUZZ_BUILD_VERSION}; \
-		docker push yfuzz/$${image}; \
+		echo "Tagging image $${image}:latest and $${image}:${YFUZZ_BUILD_VERSION}" ; \
+		docker pull yfuzz/$${image}:build-${GIT_SHA} ; \
+		docker tag yfuzz/$${image}:build-${GIT_SHA} yfuzz/$${image}:latest ; \
+		docker tag yfuzz/$${image}:build-${GIT_SHA} yfuzz/$${image}:${YFUZZ_BUILD_VERSION} ; \
+		docker push yfuzz/$${image} ; \
+		echo "Cleaning build images from docker hub" ; \
+		curl -v -L -H "Authorization: JWT $${TOKEN}" -X DELETE https://hub.docker.com/v2/repositories/yfuzz/$${image}/tags/build-${GIT_SHA} >/dev/null 2>&1 ; \
 	done
+else ifeq (${target},yfuzz-server)
+	# By default call the docker version of yFuzz server
+	$(MAKE) --directory=${${target}-path} docker
 else
-	make --directory=${${target}-path}
+	$(MAKE) --directory=${${target}-path}
 endif
 
 .PHONY: deps lint test clean subproject deploy-github deploy-dockerhub

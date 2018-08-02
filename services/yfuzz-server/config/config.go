@@ -47,8 +47,8 @@ func Init() {
 
 // InitFake loads a fake configuration for running tests.
 func InitFake() {
-	viper.SetConfigName("test-config")
-	viper.AddConfigPath("../test-data")
+	viper.SetConfigName("config")
+	viper.AddConfigPath("../test_data")
 	err := viper.ReadInConfig()
 
 	jww.SetStdoutThreshold(jww.LevelInfo)

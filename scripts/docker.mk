@@ -6,6 +6,7 @@
 #
 
 TARGET ?= $(shell basename `pwd`)
+DOCKERFILE ?= $(shell pwd)/Dockerfile
 YFUZZ_BUILD_VERSION ?= $(shell git describe --tags --abbrev=0)_local
 GIT_SHA := $(shell git rev-parse --short HEAD)
 IMAGE_NAME := yfuzz/${TARGET}:build-${GIT_SHA}
@@ -17,11 +18,15 @@ deps:
 
 lint:
 	@echo Running linters for ${IMAGE_NAME}.
-	docker run --rm -i hadolint/hadolint < Dockerfile
+	docker run --rm -i hadolint/hadolint < ${DOCKERFILE}
 
 build:
 	@echo Building ${IMAGE_NAME}.
-	docker build -t ${IMAGE_NAME} .
+ifdef TRAVIS
+	docker build -t ${IMAGE_NAME} --build-arg YFUZZ_BUILD_VERSION=$(shell git describe --tags --abbrev=0) --file ${DOCKERFILE} .
+else
+	docker build -t ${IMAGE_NAME} --file ${DOCKERFILE} .
+endif
 
 test:
 	@echo "test: nothing to do for image ${IMAGE_NAME}."
