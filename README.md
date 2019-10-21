@@ -4,7 +4,7 @@
 
 yFuzz is a project for running fuzzing jobs at scale with Kubernetes.
 
-**This project is still in alpha. While in alpha, the API may be subject to breaking changes.**
+**Since Google open-sourced more of [ClusterFuzz](https://github.com/google/clusterfuzz) this project has been discontinued.**
 
 ## Table of Contents
 
