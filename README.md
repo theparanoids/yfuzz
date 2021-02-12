@@ -1,3 +1,6 @@
+# ARCHIVED
+
+
 # yFuzz
 
 [![Build Status](https://travis-ci.org/yahoo/yfuzz.svg?branch=master)](https://travis-ci.org/yahoo/yfuzz) ![godoc](https://godoc.org/github.com/yahoo/yfuzz?status.svg)
